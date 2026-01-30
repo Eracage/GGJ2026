@@ -131,7 +131,8 @@ GameObject:
   - component: {fileID: 20014130}
   - component: {fileID: 20014129}
   - component: {fileID: 20014128}
-  m_Layer: 0
+  - component: {fileID: 20014132}
+  m_Layer: 6
   m_Name: Sheep (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,6 +232,74 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &20014132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20014127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
+  testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
+--- !u!1 &196876773
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 196876774}
+  - component: {fileID: 196876775}
+  m_Layer: 0
+  m_Name: InteractionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &196876774
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196876773}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.3826837, z: -0, w: 0.9238795}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 2, y: 1, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2097197786}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!65 &196876775
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 196876773}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 55
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &205220389
 GameObject:
   m_ObjectHideFlags: 0
@@ -243,7 +312,8 @@ GameObject:
   - component: {fileID: 205220392}
   - component: {fileID: 205220391}
   - component: {fileID: 205220390}
-  m_Layer: 0
+  - component: {fileID: 205220394}
+  m_Layer: 6
   m_Name: Sheep (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,6 +413,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &205220394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205220389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
+  testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
 --- !u!1 &1161986521
 GameObject:
   m_ObjectHideFlags: 0
@@ -355,7 +440,8 @@ GameObject:
   - component: {fileID: 1161986524}
   - component: {fileID: 1161986523}
   - component: {fileID: 1161986522}
-  m_Layer: 0
+  - component: {fileID: 1161986526}
+  m_Layer: 6
   m_Name: Sheep (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,6 +541,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1161986526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161986521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
+  testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
 --- !u!1 &1353235481
 GameObject:
   m_ObjectHideFlags: 0
@@ -604,7 +705,8 @@ GameObject:
   - component: {fileID: 1443650673}
   - component: {fileID: 1443650672}
   - component: {fileID: 1443650671}
-  m_Layer: 0
+  - component: {fileID: 1443650675}
+  m_Layer: 6
   m_Name: Sheep
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -704,6 +806,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1443650675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443650670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
+  testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
 --- !u!1 &1664516828
 GameObject:
   m_ObjectHideFlags: 0
@@ -944,159 +1061,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2097197782
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2097197786}
-  - component: {fileID: 2097197789}
-  - component: {fileID: 2097197790}
-  - component: {fileID: 2097197783}
-  - component: {fileID: 2097197788}
-  - component: {fileID: 2097197787}
-  m_Layer: 0
-  m_Name: PlayerBase
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!65 &2097197783
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097197782}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!4 &2097197786
+--- !u!4 &2097197786 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+  m_PrefabInstance: {fileID: 175027600776835300}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097197782}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2097197787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097197782}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5e719ed89d6ca2438e701376c9b4f0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  m_MovementSpeed: 5
-  m_RotationSpeed: 7
---- !u!143 &2097197788
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097197782}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 1
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!33 &2097197789
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097197782}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2097197790
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2097197782}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: fd20eafb45993c44a94bc7c6a7381b20, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2134541226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,7 +1078,8 @@ GameObject:
   - component: {fileID: 2134541229}
   - component: {fileID: 2134541228}
   - component: {fileID: 2134541227}
-  m_Layer: 0
+  - component: {fileID: 2134541231}
+  m_Layer: 6
   m_Name: Sheep (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1209,6 +1179,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2134541231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2134541226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
+  testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
 --- !u!1 &2137487876
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1206,8 @@ GameObject:
   - component: {fileID: 2137487879}
   - component: {fileID: 2137487878}
   - component: {fileID: 2137487877}
-  m_Layer: 0
+  - component: {fileID: 2137487881}
+  m_Layer: 6
   m_Name: Sheep (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1321,6 +1307,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2137487881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137487876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
+  testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
+--- !u!1001 &175027600776835300
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4828923714965710002, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_InteractionCollider
+      value: 
+      objectReference: {fileID: 196876775}
+    - target: {fileID: 4828923714965710002, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_InteractionZoneSize
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6356458228692093530, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      propertyPath: m_Name
+      value: PlayerBase
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5933870318703930146, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 196876774}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3298f7990635fe1418a3beb8142a2f79, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1328,7 +1397,7 @@ SceneRoots:
   - {fileID: 1353235484}
   - {fileID: 1664516830}
   - {fileID: 1705999787}
-  - {fileID: 2097197786}
+  - {fileID: 175027600776835300}
   - {fileID: 1443650674}
   - {fileID: 20014131}
   - {fileID: 1161986525}
