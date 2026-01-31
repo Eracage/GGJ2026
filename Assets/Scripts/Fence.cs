@@ -119,7 +119,7 @@ public class Fence : MonoBehaviour
 
 			Transforms[p].LookAt(Transforms[p + 1]);
 			
-			boxC.center = new Vector3(0,0,((p2 - p1) * 0.5f).magnitude);
+			boxC.center = new Vector3(0, columnHeight * 0.5f, ((p2 - p1) * 0.5f).magnitude);
 			var sx = 0.2f;
 			var sy = columnHeight;
 			var sz = ((p1 - p2)).magnitude;
