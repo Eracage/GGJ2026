@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     void CameraPos()
     {
         playerCamera.transform.localPosition = m_cameraPos;
-        playerCamera.transform.LookAt(transform.position + new Vector3(0, 0.2f, 0),Vector3.up);
+        playerCamera.transform.LookAt(transform.position + new Vector3(0, 1.2f, 0),Vector3.up);
     }
 
     void Interaction(InputAction.CallbackContext context)
