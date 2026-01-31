@@ -20,12 +20,9 @@ public class Fence : MonoBehaviour
 
 	private void Start()
 	{
-		Transforms = new List<Transform>();
+
 		// Create a new mesh instance
 		mesh = new Mesh();
-		foreach (Transform t in transform) {
-			Transforms.Add(t);
-		}
 		// Assign the mesh to the Meshfilter
 		GetComponent<MeshFilter>().mesh = mesh;
 		updateMesh();
@@ -37,14 +34,21 @@ public class Fence : MonoBehaviour
         {
 			updateMesh();
         }
-
 	}
 
 	void updateMesh()
     {
+		Transforms = new List<Transform>();
+		foreach (Transform t in transform)
+		{
+			Transforms.Add(t);
+		}
+
 		if (_points.Count != Transforms.Count)
 		{
 			_points = Transforms.Select(o => o.transform.localPosition).ToList();
+			CreateTriangle();
+			return;
 		}
 
 		for (var i = 0; i < _points.Count; i++)
