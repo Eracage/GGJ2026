@@ -20,7 +20,7 @@ public class InfoBox : MonoBehaviour
         m_IconCount++;
     }
 
-    public void ShowIcons(Sprite icon)
+    public void ShowIcons()
     {
         m_Text.gameObject.SetActive(false);
         for (int i = 0; i < m_IconCount; i++)
