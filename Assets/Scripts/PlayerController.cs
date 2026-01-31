@@ -8,6 +8,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     BoxCollider m_InteractionCollider;
 
+    [SerializeField]
+    Vector3 m_cameraPos = new Vector3(0.0f, 2.0f, -3.0f);
+
     CharacterController m_CharacterController;
     InputAction m_MoveAction;
     [SerializeField]
@@ -19,17 +22,32 @@ public class PlayerController : MonoBehaviour
 
     bool m_DebugInteractionBox = false;
 
+    public Transform model;
+    public Camera playerCamera;
+
     void Awake()
     {
         m_InteractionCollider.enabled = false;
         InputSystem.actions.FindAction("Interact", true).started += Interaction;
         m_MoveAction = InputSystem.actions.FindAction("Move", true);
-        m_CharacterController = GetComponent<CharacterController>();
+        m_CharacterController = transform.GetComponent<CharacterController>();
+
+        if (!model)
+            model = transform;
+        if (!playerCamera)
+            playerCamera = Camera.main;
     }
 
     void Update()
     {
         Movement();
+        CameraPos();
+    }
+
+    void CameraPos()
+    {
+        playerCamera.transform.localPosition = m_cameraPos;
+        playerCamera.transform.LookAt(transform.position + new Vector3(0, 0.2f, 0),Vector3.up);
     }
 
     void Interaction(InputAction.CallbackContext context)
@@ -50,7 +68,7 @@ public class PlayerController : MonoBehaviour
                 closest = i;
         }
 
-        InteractionData data = hits[closest].gameObject.GetComponent<AnimalController>().Interact();
+        InteractionData data = hits[closest].gameObject.GetComponent<IInteractable>().Interact();
         StartCoroutine(InteractionCooldown(data.duration));
     }
 

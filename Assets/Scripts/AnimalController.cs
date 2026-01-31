@@ -89,7 +89,7 @@ public class AnimalController : MonoBehaviour, IInteractable
         if (Time.time < m_NextLoiterTime)
             return;
 
-        Debug.Log("Animal " + gameObject.name + " loitering!");
+        //Debug.Log("Animal " + gameObject.name + " loitering!");
 
         //If far from animal go to animal else move to random
         float closestDistance = float.PositiveInfinity;

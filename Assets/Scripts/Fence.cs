@@ -3,14 +3,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
 [ExecuteInEditMode]
 public class Fence : MonoBehaviour
 {
 	private Mesh mesh;
 
 	private List<Vector3> _points = new List<Vector3>();
-	
-
 
 	private List<Transform> Transforms;
 	public float startOffsetOfColumn = 0;
@@ -26,21 +25,29 @@ public class Fence : MonoBehaviour
 		mesh = new Mesh();
 		foreach (Transform t in transform) {
 			Transforms.Add(t);
-				}
+		}
 		// Assign the mesh to the Meshfilter
 		GetComponent<MeshFilter>().mesh = mesh;
-		Update();
+		updateMesh();
 	}
 
 	private void Update()
-	{		
-		
+	{
+		if (!Application.isPlaying)
+        {
+			updateMesh();
+        }
+
+	}
+
+	void updateMesh()
+    {
 		if (_points.Count != Transforms.Count)
 		{
 			_points = Transforms.Select(o => o.transform.localPosition).ToList();
 		}
 
-		for (var i=0; i < _points.Count; i++)
+		for (var i = 0; i < _points.Count; i++)
 		{
 			if (_points[i] != Transforms[i].position)
 			{
@@ -49,9 +56,7 @@ public class Fence : MonoBehaviour
 				break;
 			}
 		}
-		
 	}
-
 
 	private void CreateTriangle()
 	{
