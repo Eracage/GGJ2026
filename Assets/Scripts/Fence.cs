@@ -13,11 +13,11 @@ public class Fence : MonoBehaviour
 
 
 	private List<Transform> Transforms;
-	public float startOffsetOfColumn = -5;
-	public float columnHeight = 20;
-	public float textVerticalStep = 10;
+	public float startOffsetOfColumn = 0;
+	public float columnHeight = 1.8f;
+	public float textVerticalStep = 100;
 	public float textHorizontalStep = 1;
-	public float columnSpacing = 30;
+	public float columnSpacing = 1;
 
 	private void Start()
 	{
@@ -58,14 +58,14 @@ public class Fence : MonoBehaviour
 	{
 		var fenceProfile = new Profile(new List<Vector2>
 		{
-			new (-1,-2),			
-			new (1,-2),
+			new (-0.025f,-0.075f),			
+			new (0.025f,-0.075f),
 
-			new (1,2),			
-			new (-1,2),
+			new (0.025f,0.075f),			
+			new (-0.025f,0.075f),
 		});
 
-		var columnScale = 0.2f;
+		var columnScale = 0.02f;
 		var columnProfile = new Profile(new List<Vector2>
 		{
 			new (-2*columnScale,-2*columnScale),
@@ -90,26 +90,41 @@ public class Fence : MonoBehaviour
 			var p1 = _points[p];
 			var p2 = _points[p+1];
 
-			fenceProfile.CreateBeam(p1, p2, mesh, textHorizontalStep);
-			fenceProfile.CreateBeam(p1 + new Vector3(0, 10, 0), p2 + new Vector3(0, 10, 0), mesh, textHorizontalStep);
+			fenceProfile.CreateBeam(p1 + new Vector3(0, 0.4f * columnHeight, 0), p2 + new Vector3(0, 0.4f * columnHeight, 0), mesh, textHorizontalStep);
+			fenceProfile.CreateBeam(p1 + new Vector3(0, 0.9f * columnHeight, 0), p2 + new Vector3(0, 0.9f * columnHeight, 0), mesh, textHorizontalStep);
 
 			var direction = p2 - p1;
 			var side = Vector3.Normalize(new Vector3(-direction.z, 0, direction.x));
 
 			var length = direction.magnitude;
 			var columnCount = Mathf.Max(2, Mathf.Ceil(length / columnSpacing));
-			var offset = 0.1f * length;
-			var step = 0.8f * length / (columnCount - 1);
+			var offset = columnSpacing/2;
+			var step = (length-offset*2) / (columnCount - 1);
 
-			var currentLocation = 0.1f * length;
+			var currentLocation = offset/length * length;
 			var conversion = 0f;
 			for (var i = 0f; i < columnCount; i++)
 			{
 				conversion = currentLocation / length;
-				columnProfile.CreateColumn(p1 + new Vector3(0, startOffsetOfColumn, 0)+ side*1f, p2 + new Vector3(0, startOffsetOfColumn, 0) + side * 1f, conversion, columnHeight, mesh, textVerticalStep);
+				columnProfile.CreateColumn(p1 + new Vector3(0, startOffsetOfColumn, 0)+ side* 0.02f, p2 + new Vector3(0, startOffsetOfColumn, 0) + side * 0.02f, conversion, columnHeight, mesh, textVerticalStep);
 				currentLocation += step;
 			}
+
+			var boxC = Transforms[p].gameObject.GetComponent<BoxCollider>();
+
+			if (boxC == null)
+			{
+				Transforms[p].gameObject.AddComponent<BoxCollider>();
+				boxC = Transforms[p].gameObject.GetComponent<BoxCollider>();
+			}
+
+			Transforms[p].LookAt(Transforms[p + 1]);
 			
+			boxC.center = new Vector3(0,0,((p2 - p1) * 0.5f).magnitude);
+			var sx = 0.2f;
+			var sy = columnHeight;
+			var sz = ((p1 - p2)).magnitude;
+			boxC.size = new Vector3(sx, sy, sz);
 
 		}
 
