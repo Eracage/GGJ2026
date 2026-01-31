@@ -6,6 +6,7 @@ public enum OpeningStateEnum
 	Opening = 1,
 	Closing = 2,
 }
+
 [ExecuteInEditMode]
 public class Gate : MonoBehaviour
 {

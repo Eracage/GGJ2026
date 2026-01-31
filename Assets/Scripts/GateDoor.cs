@@ -18,10 +18,9 @@ public class GateDoor: MonoBehaviour
 
 	private void Start()
 	{
-		
-		
-		CreateDoorMesh();
-		Update();
+		_height = height;
+		_width = width;
+		//CreateDoorMesh();
 		
 	}
 
@@ -44,19 +43,22 @@ public class GateDoor: MonoBehaviour
 		fenceProfile.CreateColumn(new Vector3(0.075f, 0, 0),new Vector3(width - 0.075f, 0, 0), 0,height, mesh, 20f);
 		fenceProfile.CreateColumn(new Vector3(0.075f, 0, 0),new Vector3(width - 0.075f, 0, 0), 1, height, mesh, 20f);
 
-		var collider = this.gameObject.GetComponent<BoxCollider>();
-		collider.center = new Vector3(width / 2f, height/2f, 0); 
+		var collider = gameObject.GetComponent<BoxCollider>();
+		collider.center = new Vector3(width / 2f, height/2f, 0);
 		collider.size = new Vector3(width, height, 0.1f);
 		GetComponent<MeshFilter>().mesh = mesh;
 	}
 
 	private void Update()
 	{
-		if (_height != height || _width != width)
+		if (!Application.isPlaying)
 		{
-			_height = height;
-			_width = width;
-			CreateDoorMesh();
+			if (_height != height || _width != width)
+			{
+				_height = height;
+				_width = width;
+				CreateDoorMesh();
+			}
 		}
 	}
 }
