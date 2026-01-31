@@ -62,3 +62,7 @@ sysinfo.txt
 crashlytics-build.properties
 
 *.kra
+
+
+*.xsd
+SceneTemplateSettings.json
