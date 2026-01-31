@@ -10,5 +10,5 @@ public class MaskData : ScriptableObject
     public bool onRabbit;
     public bool onWolf;
     public Sprite playerMask;
-    public Color color;
+    public Color color = Color.white;
 }
