@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,55 +8,105 @@ public class Fence : MonoBehaviour
 {
 	private Mesh mesh;
 
-	private Vector3 _p1 = new Vector3();
-	private Vector3 _p2 = new Vector3();
+	private List<Vector3> _points = new List<Vector3>();
+	
 
-	public Vector3 P1 = new Vector3();
-	public Vector3 P2 = new Vector3();	
+
+	public List<GameObject> Nodes;
+	public float startOffsetOfColumn = -5;
+	public float columnHeight = 20;
+	public float textVerticalStep = 10;
+	public float textHorizontalStep = 1;
+	public float columnSpacing = 30;
 
 	private void Start()
 	{
 		// Create a new mesh instance
 		mesh = new Mesh();
-
+		
 		// Assign the mesh to the Meshfilter
 		GetComponent<MeshFilter>().mesh = mesh;
-
-		CreateTriangle();
+		Update();
 	}
 
 	private void Update()
-	{
-		if (_p1 != P1)
+	{		
+		if (_points.Count != Nodes.Count)
 		{
-			_p1 = P1;
-			CreateTriangle();
+			_points = Nodes.Select(o => o.transform.localPosition).ToList();
 		}
 
-		if (_p2 != P2)
+		for (var i=0; i < _points.Count; i++)
 		{
-			_p2 = P2;
-			CreateTriangle();
+			if (_points[i] != Nodes[0].transform.position)
+			{
+				_points = Nodes.Select(o => o.transform.localPosition).ToList();
+				CreateTriangle();
+				break;
+			}
 		}
+		
 	}
 
 
 	private void CreateTriangle()
 	{
-		var profile = new Profile(new List<Vector2>
+		var fenceProfile = new Profile(new List<Vector2>
 		{
-			new (-2,-2),
-			new (0,-3),
-			new (2,-2),
+			new (-1,-2),			
+			new (1,-2),
 
-			new (2,2),
-			new (0,3),
-			new (-2,2),
+			new (1,2),			
+			new (-1,2),
+		});
+
+		var columnScale = 0.2f;
+		var columnProfile = new Profile(new List<Vector2>
+		{
+			new (-2*columnScale,-2*columnScale),
+			new (0,-3*columnScale),
+			new (2*columnScale,-2*columnScale),
+			new (2*columnScale,2*columnScale),
+			new (0,3*columnScale),
+			new (-2*columnScale,2*columnScale),
 		});
 
 		// Define arrays for vertices, UVs, and triangles
-	  profile.CreateBeam(_p1, _p2, mesh);
-		
+
+		mesh.Clear();
+
+		if (_points.Count < 2)
+		{
+			return;
+		}
+
+		for (var p = 0; p < _points.Count-1;p++) {
+
+			var p1 = _points[p];
+			var p2 = _points[p+1];
+
+			fenceProfile.CreateBeam(p1, p2, mesh, textHorizontalStep);
+			fenceProfile.CreateBeam(p1 + new Vector3(0, 10, 0), p2 + new Vector3(0, 10, 0), mesh, textHorizontalStep);
+
+			var direction = p2 - p1;
+			var side = Vector3.Normalize(new Vector3(-direction.z, 0, direction.x));
+
+			var length = direction.magnitude;
+			var columnCount = Mathf.Max(2, Mathf.Ceil(length / columnSpacing));
+			var offset = 0.1f * length;
+			var step = 0.8f * length / (columnCount - 1);
+
+			var currentLocation = 0.1f * length;
+			var conversion = 0f;
+			for (var i = 0f; i < columnCount; i++)
+			{
+				conversion = currentLocation / length;
+				columnProfile.CreateColumn(p1 + new Vector3(0, startOffsetOfColumn, 0)+ side*1f, p2 + new Vector3(0, startOffsetOfColumn, 0) + side * 1f, conversion, columnHeight, mesh, textVerticalStep);
+				currentLocation += step;
+			}
+			
+
+		}
 	}
 }
 
@@ -67,16 +118,100 @@ public class Profile
 		SectionPoints = sections;
 	}
 
-	public void CreateBeam(Vector3 from , Vector3 to, Mesh result)
+	public void CreateColumn(Vector3 from, Vector3 to, float location, float height, Mesh result, float textVerticalStep)
 	{
-	
-		
+		var firstId = result.vertices.Length > 0 ? result.vertices.Length : 0;
 		var direction = to - from;
+		var length = direction.magnitude;
+
+		var orginalDirection = Vector3.Normalize(direction);
+		direction.y = 0;
+		direction = Vector3.Normalize(direction);
+		
+		var side = new Vector3(-direction.z, 0, direction.x);
+		var up = new Vector3(0, 1, 0);
+
+		var startPoints = new List<Vector3>();
+		var endPoints = new List<Vector3>();
+		var startUvs = new List<Vector2>();
+		var endUvs = new List<Vector2>();
+
+		var triangles = new List<int>();
+		var startEndingTriangles = new List<int>();
+		var endEndingTriangles = new List<int>();
+
+		
+
+
+		for (var i = 0; i < SectionPoints.Count; i++)
+		{
+
+			startPoints.Add(from + location * length * orginalDirection + SectionPoints[i].x * side + SectionPoints[i].y * direction);
+			endPoints.Add(from + location * length * orginalDirection + SectionPoints[i].x * side + SectionPoints[i].y * direction + up * height);
+
+			startUvs.Add(new Vector2(0, ((float)i) / SectionPoints.Count * length / textVerticalStep));
+			endUvs.Add(new Vector2(1, ((float)i) / SectionPoints.Count * length / textVerticalStep));
+
+			
+			
+			triangles.Add(firstId + (i + 1) % SectionPoints.Count + SectionPoints.Count);
+			triangles.Add(firstId + i + SectionPoints.Count);
+			triangles.Add(firstId + i);
+
+			
+			triangles.Add(firstId + (i + 1) % SectionPoints.Count);
+			triangles.Add(firstId + (i + 1) % SectionPoints.Count + SectionPoints.Count);
+			triangles.Add(firstId + i);
+
+			if (i < SectionPoints.Count - 1)
+			{
+								
+				startEndingTriangles.Add(firstId + (i + 2) % SectionPoints.Count);
+				startEndingTriangles.Add(firstId + (i + 1) % SectionPoints.Count);
+				startEndingTriangles.Add(firstId + 0);
+								
+				startEndingTriangles.Add(firstId + SectionPoints.Count);
+				startEndingTriangles.Add(firstId + (i + 1) % SectionPoints.Count + SectionPoints.Count);
+				startEndingTriangles.Add(firstId + (i + 2) % SectionPoints.Count + SectionPoints.Count);
+			}
+
+
+		}
+
+		triangles.AddRange(startEndingTriangles);
+		triangles.AddRange(endEndingTriangles);
+
+		var finalPoints = new List<Vector3>();
+		finalPoints.AddRange(startPoints);
+		finalPoints.AddRange(endPoints);
+
+		var finalUvs = new List<Vector2>();
+		finalUvs.AddRange(startUvs);
+		finalUvs.AddRange(endUvs);
+
+		if (firstId > 0)
+		{
+			finalPoints.InsertRange(0, result.vertices);
+			triangles.InsertRange(0, result.triangles);
+			finalUvs.InsertRange(0, result.uv);
+		}
+		var varray = finalPoints.ToArray();
+		result.vertices = varray;
+		result.triangles = triangles.ToArray();
+		result.uv = finalUvs.ToArray();
+	}
+
+	public void CreateBeam(Vector3 from, Vector3 to, Mesh result, float textHorizontalStep)
+	{
+
+		var firstId = result.vertices.Length > 0 ? result.vertices.Length : 0;
+		var direction = to - from;
+		var l = direction.magnitude;
 		direction.y = 0;
 		direction = Vector3.Normalize(direction);
 		var side = new Vector3(-direction.z, 0, direction.x);
 		var up = new Vector3(0, 1, 0);
-		
+
 		var startPoints = new List<Vector3>();
 		var endPoints = new List<Vector3>();
 		var startUvs = new List<Vector2>();
@@ -87,31 +222,32 @@ public class Profile
 		var endEndingTriangles = new List<int>();
 
 
-		for (var i = 0; i < SectionPoints.Count; i++) {
+		for (var i = 0; i < SectionPoints.Count; i++)
+		{
 
 			startPoints.Add(from + SectionPoints[i].x * side + SectionPoints[i].y * up);
 			endPoints.Add(to + SectionPoints[i].x * side + SectionPoints[i].y * up);
 
-			startUvs.Add(new Vector2(0,0));
-			endUvs.Add(new Vector2(1, 0));
+			startUvs.Add(new Vector2(0, ((float)i) / SectionPoints.Count * l / textHorizontalStep));
+			endUvs.Add(new Vector2(1, ((float)i) / SectionPoints.Count * l / textHorizontalStep));
 
-			triangles.Add(i);
-			triangles.Add(i + SectionPoints.Count);
-			triangles.Add((i + 1) % SectionPoints.Count + SectionPoints.Count);
+			triangles.Add(firstId + i);
+			triangles.Add(firstId + i + SectionPoints.Count);
+			triangles.Add(firstId + (i + 1) % SectionPoints.Count + SectionPoints.Count);
 
-			triangles.Add(i);
-			triangles.Add((i + 1) % SectionPoints.Count + SectionPoints.Count);
-			triangles.Add((i + 1) % SectionPoints.Count);
+			triangles.Add(firstId + i);
+			triangles.Add(firstId + (i + 1) % SectionPoints.Count + SectionPoints.Count);
+			triangles.Add(firstId + (i + 1) % SectionPoints.Count);
 
 			if (i < SectionPoints.Count - 1)
 			{
-				startEndingTriangles.Add(0);
-				startEndingTriangles.Add((i + 1) % SectionPoints.Count);
-				startEndingTriangles.Add((i + 2) % SectionPoints.Count);
+				startEndingTriangles.Add(firstId + 0);
+				startEndingTriangles.Add(firstId + (i + 1) % SectionPoints.Count);
+				startEndingTriangles.Add(firstId + (i + 2) % SectionPoints.Count);
 
-				startEndingTriangles.Add((i + 2) % SectionPoints.Count + SectionPoints.Count);
-				startEndingTriangles.Add((i + 1) % SectionPoints.Count + SectionPoints.Count);
-				startEndingTriangles.Add(SectionPoints.Count);								
+				startEndingTriangles.Add(firstId + (i + 2) % SectionPoints.Count + SectionPoints.Count);
+				startEndingTriangles.Add(firstId + (i + 1) % SectionPoints.Count + SectionPoints.Count);
+				startEndingTriangles.Add(firstId + SectionPoints.Count);
 			}
 		}
 
@@ -125,13 +261,18 @@ public class Profile
 		var finalUvs = new List<Vector2>();
 		finalUvs.AddRange(startUvs);
 		finalUvs.AddRange(endUvs);
+
+		if (firstId > 0)
+		{
+			finalPoints.InsertRange(0, result.vertices);
+			triangles.InsertRange(0, result.triangles);
+			finalUvs.InsertRange(0, result.uv);
+		}
 		var varray = finalPoints.ToArray();
 		result.vertices = varray;
 		result.triangles = triangles.ToArray();
-		
 		result.uv = finalUvs.ToArray();
-
-
-	
+		
 	}
 }
+
