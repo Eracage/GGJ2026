@@ -29,7 +29,6 @@ public class Fence : MonoBehaviour
 				}
 		// Assign the mesh to the Meshfilter
 		GetComponent<MeshFilter>().mesh = mesh;
-		GetComponent<MeshCollider>().sharedMesh = mesh;
 		Update();
 	}
 
