@@ -325,7 +325,13 @@ MonoBehaviour:
   m_InteractionCollider: {fileID: 5704311036784691594}
   m_cameraPos: {x: 0, y: 2, z: -3}
   m_MovementSpeed: 5
-  m_RotationSpeed: 7
+  m_RotationSpeed: 90
+  sprintFactor: 3
+  maxStamina: 100
+  staminaRegenPerSecond: 10
+  staminaRegenFactorWhenWalking: 0.25
+  sprintCostStamina: 20
+  currentStamina: 100
   model: {fileID: 3995691651087052790}
   playerCamera: {fileID: 3718983368780852876}
 --- !u!1 &8447702876733923716
