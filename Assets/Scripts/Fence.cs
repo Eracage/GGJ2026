@@ -12,7 +12,7 @@ public class Fence : MonoBehaviour
 	
 
 
-	public List<GameObject> Nodes;
+	private List<Transform> Transforms;
 	public float startOffsetOfColumn = -5;
 	public float columnHeight = 20;
 	public float textVerticalStep = 10;
@@ -21,26 +21,31 @@ public class Fence : MonoBehaviour
 
 	private void Start()
 	{
+		Transforms = new List<Transform>();
 		// Create a new mesh instance
 		mesh = new Mesh();
-		
+		foreach (Transform t in transform) {
+			Transforms.Add(t);
+				}
 		// Assign the mesh to the Meshfilter
 		GetComponent<MeshFilter>().mesh = mesh;
+		GetComponent<MeshCollider>().sharedMesh = mesh;
 		Update();
 	}
 
 	private void Update()
 	{		
-		if (_points.Count != Nodes.Count)
+		
+		if (_points.Count != Transforms.Count)
 		{
-			_points = Nodes.Select(o => o.transform.localPosition).ToList();
+			_points = Transforms.Select(o => o.transform.localPosition).ToList();
 		}
 
 		for (var i=0; i < _points.Count; i++)
 		{
-			if (_points[i] != Nodes[0].transform.position)
+			if (_points[i] != Transforms[i].position)
 			{
-				_points = Nodes.Select(o => o.transform.localPosition).ToList();
+				_points = Transforms.Select(o => o.transform.localPosition).ToList();
 				CreateTriangle();
 				break;
 			}
@@ -107,6 +112,8 @@ public class Fence : MonoBehaviour
 			
 
 		}
+
+		GetComponent<MeshFilter>().mesh = mesh;
 	}
 }
 
