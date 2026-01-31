@@ -16,15 +16,11 @@ public class PlayerController : MonoBehaviour
     float m_RotationSpeed = 5;
     Quaternion m_TargetRotation;
     bool m_IsInteracting = false;
-    [SerializeField]
-    float m_InteractionZoneSize = 2;
-        [SerializeField]
-    float m_InteractionDistance = 2;
 
     bool m_DebugInteractionBox = false;
 
     void Awake()
-    {   
+    {
         m_InteractionCollider.enabled = false;
         InputSystem.actions.FindAction("Interact", true).started += Interaction;
         m_MoveAction = InputSystem.actions.FindAction("Move", true);
@@ -47,7 +43,10 @@ public class PlayerController : MonoBehaviour
         int closest = 0;
         for(int i =0; i < hits.Length; i++)
         {
-            if(Vector3.Distance(hits[i].transform.position, transform.position) < Vector3.Distance(hits[closest].transform.position, transform.position))
+            var closestpos = hits[closest].transform.position;
+            var hitpos = hits[i].transform.position;
+            var targetpos = (m_InteractionCollider.transform.position + transform.position) * 0.5f;
+            if (Vector3.Distance(hitpos, (m_InteractionCollider.transform.position + transform.position) * 0.5f) < Vector3.Distance(hits[closest].transform.position, transform.position))
                 closest = i;
         }
 
@@ -69,9 +68,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, m_TargetRotation, Time.deltaTime * m_RotationSpeed);
         }
         
-        
         m_CharacterController.Move(direction* m_MovementSpeed * Time.deltaTime);
-        
     }
 
     IEnumerator InteractionCooldown(float duration)
@@ -93,7 +90,6 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.yellow;
         //m_InteractionCollider.center,m_InteractionCollider.bounds.extents,m_InteractionCollider.transform.rotation, mask
         Gizmos.DrawWireCube(m_InteractionCollider.transform.position, m_InteractionCollider.transform.localScale);
-        
     }
 
 }
