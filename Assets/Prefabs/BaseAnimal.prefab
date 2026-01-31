@@ -167,30 +167,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7815457022020117149}
     m_Modifications:
-    - target: {fileID: 422268012665830648, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1960951393424774099, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2585419628695332518, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2654236898938347455, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3460282611189210582, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932180817184307238, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 8035043835725773453, guid: c51197fb0e81e0e46bf3cccece87f06a, type: 2}
     - target: {fileID: 7128818102636026869, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -234,22 +210,6 @@ PrefabInstance:
     - target: {fileID: 7377052441186356348, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
       propertyPath: m_Name
       value: InfoBoxPivot
-      objectReference: {fileID: 0}
-    - target: {fileID: 7707001304934464224, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: c51197fb0e81e0e46bf3cccece87f06a, type: 2}
-    - target: {fileID: 7707001304934464224, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 8035043835725773453, guid: c51197fb0e81e0e46bf3cccece87f06a, type: 2}
-    - target: {fileID: 7707001304934464224, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7852440980937103648, guid: d5bb1cdbe6e96cd42bf2040ee2b29db0, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
