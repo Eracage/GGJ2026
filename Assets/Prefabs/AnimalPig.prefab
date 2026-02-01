@@ -12,38 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pig
       objectReference: {fileID: 0}
-    - target: {fileID: 1186047259302196972, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 1500362648042340976, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 2012897083431491599, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 2040435154045201492, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 2318134786581756376, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 2777165026643260365, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 3033289896817862700, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 3037452296241916210, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
     - target: {fileID: 3699155132172923453, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -96,46 +64,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4519647122544112851, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 4855061750746217570, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 5467428327761555257, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 5866045657286148818, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 7332218307658686141, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 7384370197160785111, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 7384902272359584586, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 7836760466033713910, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 8519674276611505170, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
-    - target: {fileID: 8845841476165389865, guid: 909c2a344a8d5da46a3efb9cac0f1bba, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 829e56d7986fddb45a339684bc26b689, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -164,6 +92,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6184476706531924104, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184476706531924104, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184476706531924104, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184476706531924104, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6184476706531924104, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 6439333331242113606, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
       propertyPath: model
       value: 
