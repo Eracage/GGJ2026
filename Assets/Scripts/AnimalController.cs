@@ -5,6 +5,11 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AnimalController : MonoBehaviour, IInteractable
 {
+    public Sprite headSprite;
+    public GameObject headPosition;
+    public SpriteRenderer headPrefab;
+    public MaskData mask = null;
+
     enum State
     {
         Loitering,

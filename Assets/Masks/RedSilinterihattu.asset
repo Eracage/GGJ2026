@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d2395baafb590641870fa176c2e54c3, type: 3}
-  m_Name: SilinterihattuRed
+  m_Name: RedSilinterihattu
   m_EditorClassIdentifier: Assembly-CSharp::MaskData
   UID: 0
-  defaultMask: {fileID: 0}
-  onSheep: 0
-  onPig: 0
-  onRabbit: 0
-  onWolf: 0
-  playerMask: {fileID: 0}
+  defaultMask: {fileID: 21300000, guid: 71b4e8a609b327a4a8cfef647665c3bf, type: 3}
+  onSheep: 1
+  onPig: 1
+  onRabbit: 1
+  onWolf: 1
+  playerMask: {fileID: 21300000, guid: 71b4e8a609b327a4a8cfef647665c3bf, type: 3}
+  color: {r: 1, g: 0, b: 0, a: 1}

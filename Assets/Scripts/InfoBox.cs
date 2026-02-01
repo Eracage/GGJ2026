@@ -20,10 +20,11 @@ public class InfoBox : MonoBehaviour
         Hide();
     }
 
-    public void AddIcon(Sprite icon)
+    public void AddIcon(Sprite icon, Color color)
     {
         m_Icons[m_IconCount].sprite = icon;
         m_Icons[m_IconCount].gameObject.SetActive(true);
+        m_Icons[m_IconCount].color = color;
         m_IconCount++;
     }
 
