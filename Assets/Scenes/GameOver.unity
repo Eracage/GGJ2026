@@ -927,7 +927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioClipPlayer
   audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: 1d8abfb1fe551454190833691297560e, type: 3}
+  audioClip: {fileID: 8300000, guid: 30fcd3a2c26a37c41920f1e07f566fe2, type: 3}
   playOnStart: 1
 --- !u!82 &1652492919
 AudioSource:

@@ -16,6 +16,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     public InfoBox infoBox;
     public ArrayList alertedMaskList;
     public GameObject KillerPrefab;
+    public AudioClipPlayer audioClipPlayer;
 
     enum State
     {
@@ -93,6 +94,7 @@ public class AnimalController : MonoBehaviour, IInteractable
         alertedMaskList = new ArrayList();
 
         m_Animator = GetComponentInChildren<Animator>();
+        audioClipPlayer = GetComponent<AudioClipPlayer>();
     }
 
     void Update()
@@ -302,6 +304,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     IEnumerator Attack(State nextState)
     {
         m_CurrentState = State.Interacting;
+        audioClipPlayer.PlayAudio();
         yield return new WaitForSeconds(0.8f);
         BloodSplatter();
         //yield return new WaitForSeconds(0.2f);
