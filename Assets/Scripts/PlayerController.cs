@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -14,11 +16,14 @@ public class PlayerController : MonoBehaviour
     Vector3 m_cameraPos = new Vector3(0.0f, 2.0f, -3.0f);
 
     CharacterController m_CharacterController;
-	InputAction m_SprintAction;
-	InputAction m_MoveAction;
+    Animator m_Animator;
+    InputAction m_SprintAction;
+    InputAction m_MoveAction;
     [SerializeField]
     float m_MovementSpeed = 5;
     float backwardsFactor = 0.5f;
+    bool m_IsMoving = false;
+    bool m_IsSprinting = false;
 
     [SerializeField]
     float m_RotationSpeed = 5;
@@ -30,18 +35,23 @@ public class PlayerController : MonoBehaviour
     MaskData maskless = null;
 
     bool m_DebugInteractionBox = false;
-
+    List<string> m_AttackAnimInteractions = new List<string>()
+    {
+        "attack",
+        "having fun",
+        "play with food",
+    };
 
     public float sprintFactor = 2f;
-	public float maxStamina = 100;
-	
+    public float maxStamina = 100;
+
     public float staminaRegenPerSecond = 10;
-	public float staminaRegenFactorWhenWalking = 0.25f;
-	public float sprintCostStamina = 20;	
-	public float currentStamina = 100;
+    public float staminaRegenFactorWhenWalking = 0.25f;
+    public float sprintCostStamina = 20;
+    public float currentStamina = 100;
 
 
-	public Transform model;
+    public Transform model;
     public Camera playerCamera;
 
     void Awake()
@@ -49,8 +59,9 @@ public class PlayerController : MonoBehaviour
         m_InteractionCollider.enabled = false;
         InputSystem.actions.FindAction("Interact", true).started += Interaction;
         m_MoveAction = InputSystem.actions.FindAction("Move", true);
-		m_SprintAction = InputSystem.actions.FindAction("Sprint", true);
-		m_CharacterController = transform.GetComponent<CharacterController>();
+        m_SprintAction = InputSystem.actions.FindAction("Sprint", true);
+        m_CharacterController = transform.GetComponent<CharacterController>();
+        m_Animator = GetComponentInChildren<Animator>();
 
         if (!model)
             model = transform;
@@ -68,12 +79,34 @@ public class PlayerController : MonoBehaviour
         Movement();
         CameraPos();
         ScanInteraction(false);
+        HandleAnimation();
+    }
+
+    private void HandleAnimation()
+    {
+        if (m_IsMoving)
+        {
+            m_Animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            m_Animator.SetBool("IsMoving", false);
+        }
+
+        if (m_IsSprinting)
+        {
+            m_Animator.SetFloat("AnimSpeedMult", 3);
+        }
+        else
+        {
+            m_Animator.SetFloat("AnimSpeedMult", 1);
+        }
     }
 
     void CameraPos()
     {
         playerCamera.transform.localPosition = m_cameraPos;
-        playerCamera.transform.LookAt(transform.position + new Vector3(0, 1.2f, 0),Vector3.up);
+        playerCamera.transform.LookAt(transform.position + new Vector3(0, 1.2f, 0), Vector3.up);
     }
 
     void ScanInteraction(bool andActivate)
@@ -119,47 +152,75 @@ public class PlayerController : MonoBehaviour
     void Interaction(InputAction.CallbackContext context)
     {
         ScanInteraction(true);
+
+        if (m_AttackAnimInteractions.Contains(m_currentInteraction?.interactionName.ToLower()))
+        {
+            m_Animator.SetTrigger("Kill");
+        }
+
+        if (m_currentInteraction == null)
+        {
+            return;
+        }
         StartCoroutine(InteractionCooldown(m_currentInteraction.duration));
     }
 
     void Movement()
     {
-		if (m_IsInteracting)
-			return;
+        if (m_IsInteracting)
+            return;
 
-		Vector2 inputVal = m_MoveAction.ReadValue<Vector2>();
-		Vector3 inputDirection = new Vector3(inputVal.x, 0, inputVal.y);
-        var isSprinting = m_SprintAction.IsPressed();
+        Vector2 inputVal = m_MoveAction.ReadValue<Vector2>();
+        Vector3 inputDirection = new Vector3(inputVal.x, 0, inputVal.y);
+        var sprintPressed = m_SprintAction.IsPressed();
 
-		var forward = inputDirection.z;
-		var side = inputDirection.x;
+        var forward = inputDirection.z;
+        if (forward > 0)
+        {
+            m_IsMoving = true;
+        }
+        else
+        {
+            m_IsMoving = false;
+        }
 
+        var side = inputDirection.x;
 
-		if (Mathf.Abs(side) > 0)
-		{
-			transform.Rotate(Vector3.up, Time.deltaTime * m_RotationSpeed * side);
-            
-		}		
+        if (forward > 0)
+        {
+            m_Animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            m_Animator.SetBool("IsMoving", false);
+        }
+
+        if (Mathf.Abs(side) > 0)
+        {
+            transform.Rotate(Vector3.up, Time.deltaTime * m_RotationSpeed * side);
+        }
 
         if (Mathf.Abs(forward) > 0)
         {
-
-            if (isSprinting && currentStamina > Time.deltaTime * sprintCostStamina)
+            if (sprintPressed && currentStamina > Time.deltaTime * sprintCostStamina)
             {
+                m_IsSprinting = true;
+
                 currentStamina -= Time.deltaTime * sprintCostStamina;
                 if (forward < 0)
                 {
-					m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward * sprintFactor * backwardsFactor);
-				}
+                    m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward * sprintFactor * backwardsFactor);
+                }
                 else
                 {
-					m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward * sprintFactor);
-				}
-                    
-			}
+                    m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward * sprintFactor);
+                }
+            }
             else
             {
-                if (!isSprinting)
+                m_IsSprinting = false;
+
+                if (!sprintPressed)
                 {
                     if (currentStamina < maxStamina)
                     {
@@ -170,18 +231,20 @@ public class PlayerController : MonoBehaviour
                         currentStamina = maxStamina;
                     }
                 }
-				if (forward < 0)
-				{
-					m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward * backwardsFactor);
-				}
-				else
-				{
-					m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward);
-				}
-			}
+                if (forward < 0)
+                {
+                    m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward * backwardsFactor);
+                }
+                else
+                {
+                    m_CharacterController.Move(transform.forward * m_MovementSpeed * Time.deltaTime * forward);
+                }
+            }
         }
         else
         {
+            m_IsSprinting = false;
+
             if (currentStamina < maxStamina)
             {
                 currentStamina += Time.deltaTime * staminaRegenPerSecond;
@@ -193,8 +256,9 @@ public class PlayerController : MonoBehaviour
         }
         GameManager.GetInstance().playerCurStamina = currentStamina;
 
+
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
-	}
+    }
 
     void TryAlertAnimals(MaskData currentMask, MaskData interactionMask = null)
     {
@@ -214,7 +278,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-	IEnumerator InteractionCooldown(float duration)
+    IEnumerator InteractionCooldown(float duration)
     {
         m_IsInteracting = true;
         TryAlertAnimals(GameManager.GetInstance().playerCurrentMask, m_currentInteraction.mask);

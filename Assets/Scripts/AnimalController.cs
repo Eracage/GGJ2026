@@ -87,7 +87,7 @@ public class AnimalController : MonoBehaviour, IInteractable
         m_NextWanderDelay = Random.Range(m_MinWanderDelay, m_MaxWanderDelay);
         StartCoroutine(StartWander(m_NextWanderDelay));
         alertedMaskList = new ArrayList();
-}
+    }
 
     void Update()
     {
@@ -279,7 +279,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     IEnumerator Attack(State nextState)
     {
         m_CurrentState = State.Interacting;
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(0.8f);
         BloodSplatter();
         m_CurrentState = nextState;
     }
