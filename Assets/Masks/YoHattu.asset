@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d2395baafb590641870fa176c2e54c3, type: 3}
-  m_Name: "Y\xF6myssy"
+  m_Name: YoHattu
   m_EditorClassIdentifier: Assembly-CSharp::MaskData
   UID: 6
   defaultMask: {fileID: 21300000, guid: 8fb5bc61b4c337a4e8a323d6a9cf063c, type: 3}
