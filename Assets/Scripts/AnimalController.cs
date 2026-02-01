@@ -15,6 +15,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     public GameObject model;
     public InfoBox infoBox;
     public ArrayList alertedMaskList;
+    public GameObject KillerPrefab;
 
     enum State
     {
@@ -303,6 +304,8 @@ public class AnimalController : MonoBehaviour, IInteractable
         m_CurrentState = State.Interacting;
         yield return new WaitForSeconds(0.8f);
         BloodSplatter();
+        //yield return new WaitForSeconds(0.2f);
+        Destroy(Instantiate(KillerPrefab), 2);
         m_CurrentState = nextState;
     }
 

@@ -156,6 +156,8 @@ public class PlayerController : MonoBehaviour
 
     void Interaction(InputAction.CallbackContext context)
     {
+        if (m_IsInteracting)
+            return;
         ScanInteraction(true);
 
         if (m_AttackAnimInteractions.Contains(m_currentInteraction?.interactionName.ToLower()))

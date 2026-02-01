@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  animalType: 0
   headSprite: {fileID: 0}
   headPosition: {fileID: 0}
   headPrefab: {fileID: 7248292512316854948, guid: 6a70166142de5db4db7103ef6900107a, type: 3}
@@ -198,6 +199,7 @@ MonoBehaviour:
   goreEffect: {fileID: 5461520631957302549, guid: 7057253ef9c828747b81c20f189ea8b1, type: 3}
   model: {fileID: 3157304590471002307}
   infoBox: {fileID: 2047738032607595467}
+  KillerPrefab: {fileID: 9000080072201600776, guid: 3f3c17feee6f1da499d196d4a9f8130f, type: 3}
   m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
   m_interactAttack: {fileID: 11400000, guid: 2e9d2aae64070764381ad9dd9be2322b, type: 2}
   m_interactMask: {fileID: 11400000, guid: 808b1740af3cf2241a53b0b482f45a8a, type: 2}

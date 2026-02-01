@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Start");
         CreateInstance();
         m_Animals = new List<AnimalController>();
+        finishGates = new List<Gate>();
         ResetLevel();
     }
 
