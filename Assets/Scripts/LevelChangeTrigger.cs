@@ -10,6 +10,7 @@ public class LevelChangeTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.GetInstance().ResetLevel();
             SceneManager.LoadScene(m_NextLevel);
         }
     }

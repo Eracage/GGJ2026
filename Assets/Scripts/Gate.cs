@@ -26,7 +26,9 @@ public class Gate : MonoBehaviour
 	
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {		
+    {
+		GameManager.GetInstance().finishGates.Add(this);
+
 		door1.gameObject.transform.localPosition = new Vector3(width / 2f, 0, 0)			;
 		door1.gameObject.transform.localRotation = Quaternion.AngleAxis(180f,new Vector3(0,1,0));
 		door1.leftHanded = false;
