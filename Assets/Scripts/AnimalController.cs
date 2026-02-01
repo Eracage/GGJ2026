@@ -66,6 +66,8 @@ public class AnimalController : MonoBehaviour, IInteractable
     public Material testNormalMaterial;
     public Material testInteractMaterial;
 
+    Animator m_Animator;
+
     void Start()
     {
         GameManager.GetInstance().m_Animals.Add(this);
@@ -88,6 +90,8 @@ public class AnimalController : MonoBehaviour, IInteractable
         m_NextWanderDelay = Random.Range(m_MinWanderDelay, m_MaxWanderDelay);
         StartCoroutine(StartWander(m_NextWanderDelay));
         alertedMaskList = new ArrayList();
+
+        m_Animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -113,6 +117,20 @@ public class AnimalController : MonoBehaviour, IInteractable
             case State.Deceased:
                 break;
 
+        }
+
+        HandleAnimation();
+    }
+
+    private void HandleAnimation()
+    {
+        if (m_NavAgent.velocity.magnitude > 0.001f)
+        {
+            m_Animator.SetBool("IsMoving", true);
+        }
+        else
+        {
+            m_Animator.SetBool("IsMoving", false);
         }
     }
 
@@ -194,6 +212,7 @@ public class AnimalController : MonoBehaviour, IInteractable
         m_NextLoiterTime = Time.time + Random.Range(m_MinLoiterCooldown, m_MaxLoiterCooldown);
         SetNavDest(m_TargetPosition);
     }
+
     void WanderUpdate()
     {
 
