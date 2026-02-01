@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3628855932348256565}
   - component: {fileID: 5461092792257250068}
   m_Layer: 0
-  m_Name: SlotMask
+  m_Name: SlotHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ GameObject:
   - component: {fileID: 2834027879862969092}
   - component: {fileID: 7778084299230780810}
   m_Layer: 0
-  m_Name: SlotHead
+  m_Name: SlotMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

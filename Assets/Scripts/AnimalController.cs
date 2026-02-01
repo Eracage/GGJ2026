@@ -7,11 +7,13 @@ public class AnimalController : MonoBehaviour, IInteractable
 {
     public Sprite headSprite;
     public GameObject headPosition;
-    public SpriteRenderer headPrefab;
+    public AnimalHeadHandler headPrefab;
     public MaskData mask = null;
     public GameObject goreEffect;
     GameObject m_goreEffect;
     public GameObject model;
+    public InfoBox infoBox;
+    public ArrayList alertedMaskList;
 
     enum State
     {
@@ -67,12 +69,25 @@ public class AnimalController : MonoBehaviour, IInteractable
     {
         GameManager.GetInstance().m_Animals.Add(this);
         m_NavAgent = GetComponent<NavMeshAgent>();
+        var head = GameObject.Instantiate(headPrefab, headPosition.transform);
+        head.headSprite.sprite = headSprite;
+        if (mask)
+        {
+            head.maskSprite.sprite = mask.defaultMask;
+            head.maskSprite.color = mask.color;
+            head.maskSprite.enabled = true;
+        }
+        else
+        {
+            head.maskSprite.enabled = false;
+        }
 
         m_TargetPosition = transform.position;
         m_NextLoiterTime = Random.Range(0, m_MaxLoiterCooldown);
         m_NextWanderDelay = Random.Range(m_MinWanderDelay, m_MaxWanderDelay);
         StartCoroutine(StartWander(m_NextWanderDelay));
-    }
+        alertedMaskList = new ArrayList();
+}
 
     void Update()
     {
@@ -98,6 +113,42 @@ public class AnimalController : MonoBehaviour, IInteractable
                 break;
 
         }
+    }
+
+    public bool isAlive()
+    {
+        return m_CurrentState != State.Deceased && m_CurrentState != State.Lootable && m_CurrentState != State.Interacting;
+    }
+
+    IEnumerator ShowAlertedMasks()
+    {
+        infoBox.ShowIcons();
+
+        yield return new WaitForSeconds(4.0f);
+
+        infoBox.Hide();
+    }
+
+    public void GetAlert(MaskData mask1, MaskData mask2 = null)
+    {
+        if (!isAlive())
+            return;
+
+        AlertMask(mask1);
+        if (mask2)
+            AlertMask(mask2);
+    }
+    void AlertMask(MaskData mask)
+    {
+        if (alertedMaskList.Contains(mask))
+            return;
+
+        alertedMaskList.Add(mask);
+
+        if (mask.UID == 0)
+            infoBox.AddMaskless();
+        else
+            infoBox.AddIcon(mask.defaultMask, mask.color);
     }
 
     void InteractionUpdate()
@@ -202,9 +253,22 @@ public class AnimalController : MonoBehaviour, IInteractable
         return m_InteractionData;
     }
 
-    public InteractionData Interact()
+    public InteractionData Interact(bool activate)
     {
-        return AvailableInteraction(true);
+        return AvailableInteraction(activate);
+    }
+
+    public void Highlight(bool on, InteractionData data)
+    {
+        Debug.Log("Highlight");
+        if (on)
+        {
+            if (data && data.interactionName.Length != 0)
+                infoBox.ShowText(data.interactionName);
+            return;
+        }
+        // TODO: check raycast if should show icons
+        infoBox.Hide();
     }
 
     IEnumerator Unmask()
@@ -224,7 +288,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     {
         if (model)
         {
-            GameObject.DestroyImmediate(model);
+            model.SetActive(false);
         }
         GetComponent<Collider>().isTrigger = true;
         GameObject.Destroy(m_goreEffect, 1);

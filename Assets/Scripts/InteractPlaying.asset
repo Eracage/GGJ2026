@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6181e3c5ab019e044b1c8b8dbf7222a3, type: 3}
   m_Name: InteractPlaying
   m_EditorClassIdentifier: Assembly-CSharp::InteractionData
-  interactionName: Playing with food
+  interactionName: Play with food
   duration: 3
   mask: {fileID: 0}

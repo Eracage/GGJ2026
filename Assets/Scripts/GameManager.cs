@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour
 
     private static GameManager m_Instance;
 
+    public List<MaskData> playerFoundMasks;
+    public MaskData playerCurrentMask;
+    public float playerMaxStamina;
+    public float playerCurStamina;
+
     void Start()
     {
         CreateInstance();

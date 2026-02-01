@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     float m_RotationSpeed = 5;
     Quaternion m_TargetRotation;
     bool m_IsInteracting = false;
+    Collider m_currentInteractTarget = null;
+    InteractionData m_currentInteraction = null;
+    [SerializeField]
+    MaskData maskless = null;
 
     bool m_DebugInteractionBox = false;
 
@@ -54,10 +58,16 @@ public class PlayerController : MonoBehaviour
             playerCamera = Camera.main;
     }
 
+    private void Start()
+    {
+        GameManager.GetInstance().playerMaxStamina = maxStamina;
+    }
+
     void Update()
     {
         Movement();
         CameraPos();
+        ScanInteraction(false);
     }
 
     void CameraPos()
@@ -66,16 +76,32 @@ public class PlayerController : MonoBehaviour
         playerCamera.transform.LookAt(transform.position + new Vector3(0, 1.2f, 0),Vector3.up);
     }
 
-    void Interaction(InputAction.CallbackContext context)
+    void ScanInteraction(bool andActivate)
     {
+        if (m_IsInteracting)
+        {
+            if (m_currentInteractTarget)
+            {
+                m_currentInteractTarget.GetComponent<IInteractable>().Highlight(false, null);
+                m_currentInteractTarget = null;
+            }
+            return;
+        }
         LayerMask mask = LayerMask.GetMask("Animal");
         Collider[] hits;
-        hits = Physics.OverlapBox(m_InteractionCollider.transform.position,m_InteractionCollider.transform.localScale,m_InteractionCollider.transform.rotation, mask);
-        if(hits.Length == 0)
+        hits = Physics.OverlapBox(m_InteractionCollider.transform.position, m_InteractionCollider.transform.localScale, m_InteractionCollider.transform.rotation, mask);
+        if (hits.Length == 0)
+        {
+            if (m_currentInteractTarget)
+            {
+                m_currentInteractTarget.GetComponent<IInteractable>().Highlight(false, null);
+                m_currentInteractTarget = null;
+            }
             return;
-        
+        }
+
         int closest = 0;
-        for(int i =0; i < hits.Length; i++)
+        for (int i = 0; i < hits.Length; i++)
         {
             var closestpos = hits[closest].transform.position;
             var hitpos = hits[i].transform.position;
@@ -83,9 +109,17 @@ public class PlayerController : MonoBehaviour
             if (Vector3.Distance(hitpos, (m_InteractionCollider.transform.position + transform.position) * 0.5f) < Vector3.Distance(hits[closest].transform.position, transform.position))
                 closest = i;
         }
+        m_currentInteractTarget = hits[closest];
+        m_currentInteraction = m_currentInteractTarget.GetComponent<IInteractable>().Interact(andActivate);
 
-        InteractionData data = hits[closest].gameObject.GetComponent<IInteractable>().Interact();
-        StartCoroutine(InteractionCooldown(data.duration));
+        if (!andActivate)
+            m_currentInteractTarget.GetComponent<IInteractable>().Highlight(true, m_currentInteraction);
+    }
+
+    void Interaction(InputAction.CallbackContext context)
+    {
+        ScanInteraction(true);
+        StartCoroutine(InteractionCooldown(m_currentInteraction.duration));
     }
 
     void Movement()
@@ -157,14 +191,41 @@ public class PlayerController : MonoBehaviour
                 currentStamina = maxStamina;
             }
         }
+        GameManager.GetInstance().playerCurStamina = currentStamina;
 
         transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
 	}
 
+    void TryAlertAnimals(MaskData currentMask, MaskData interactionMask = null)
+    {
+        if (!currentMask)
+            currentMask = maskless;
+        float visionRange = 50.0f;
+        foreach (AnimalController animal in GameManager.GetInstance().m_Animals)
+        {
+            if (!animal.isAlive())
+                continue;
+
+            Ray ray = new Ray(transform.position, animal.headPosition.transform.position - transform.position);
+            if (!Physics.Raycast(ray, visionRange, LayerMask.NameToLayer("Obstacle")))
+            {
+                animal.GetAlert(currentMask, interactionMask);
+            }
+        }
+    }
+
 	IEnumerator InteractionCooldown(float duration)
     {
         m_IsInteracting = true;
+        TryAlertAnimals(GameManager.GetInstance().playerCurrentMask, m_currentInteraction.mask);
+
         yield return new WaitForSeconds(duration);
+        if (m_currentInteraction.mask)
+        {
+            GameManager.GetInstance().playerFoundMasks.Add(m_currentInteraction.mask);
+        }
+
+        TryAlertAnimals(GameManager.GetInstance().playerCurrentMask, m_currentInteraction.mask);
         m_IsInteracting = false;
     }
 

@@ -127,6 +127,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2413921441109468357, guid: 4845f949314a1e04886ae1d6550220a2, type: 3}
   m_PrefabInstance: {fileID: 670720446677394449}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4443638504426546018 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3811198794479667059, guid: 4845f949314a1e04886ae1d6550220a2, type: 3}
+  m_PrefabInstance: {fileID: 670720446677394449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6308614119506951002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -139,14 +144,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4359483258720025784, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6439333331242113606, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
-      propertyPath: headPrefab
+      propertyPath: model
       value: 
-      objectReference: {fileID: 278267989928239972, guid: 6a70166142de5db4db7103ef6900107a, type: 3}
+      objectReference: {fileID: 4443638504426546018}
     - target: {fileID: 6439333331242113606, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
       propertyPath: headSprite
       value: 

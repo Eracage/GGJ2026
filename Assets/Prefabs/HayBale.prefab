@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8315831739108143173}
   - component: {fileID: 3984478416729419474}
   - component: {fileID: 3014005692322061522}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HayBale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1314967044789725114}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HayBale
   m_TagString: Untagged
   m_Icon: {fileID: 0}
