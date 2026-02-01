@@ -200,14 +200,14 @@ public class PlayerController : MonoBehaviour
     {
         if (!currentMask)
             currentMask = maskless;
-        float visionRange = 50.0f;
+        float visionRange = 200.0f;
         foreach (AnimalController animal in GameManager.GetInstance().m_Animals)
         {
             if (!animal.isAlive())
                 continue;
 
             Ray ray = new Ray(transform.position, animal.headPosition.transform.position - transform.position);
-            if (!Physics.Raycast(ray, visionRange, LayerMask.NameToLayer("Obstacle")))
+            if (!Physics.Raycast(ray, visionRange, LayerMask.GetMask("Obstacle")))
             {
                 animal.GetAlert(currentMask, interactionMask);
             }

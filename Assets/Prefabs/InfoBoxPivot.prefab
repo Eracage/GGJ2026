@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2975771634106784385
 Transform:
   m_ObjectHideFlags: 0
@@ -289,6 +289,11 @@ MonoBehaviour:
   m_Text: {fileID: 7707001304934464224}
   m_IconCount: 0
   masklessPlayer: {fileID: 11400000, guid: a4fa9269ab91f424f9ad869a69f024ef, type: 2}
+  playerSprite: {fileID: 21300000, guid: 7af4b7077335c20498ffe3c3b4b91888, type: 3}
+  pigSprite: {fileID: 21300000, guid: 7af4b7077335c20498ffe3c3b4b91888, type: 3}
+  bunnySprite: {fileID: 21300000, guid: c468a42d6fe3ba34491db01f6784b3cb, type: 3}
+  sheepSprite: {fileID: 21300000, guid: c3bca74aee00b7140875024f851086b8, type: 3}
+  wolfSprite: {fileID: 21300000, guid: 9e55a32188530554594a084a038725a1, type: 3}
 --- !u!114 &8200556337117705845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,6 +463,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -537,6 +546,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -603,6 +616,10 @@ PrefabInstance:
     - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
       propertyPath: m_Name
       value: SlotMask (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -683,6 +700,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -761,6 +782,10 @@ PrefabInstance:
     - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
       propertyPath: m_Name
       value: SlotMask (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -841,6 +866,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -919,6 +948,10 @@ PrefabInstance:
     - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
       propertyPath: m_Name
       value: SlotMask (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -999,6 +1032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1077,6 +1114,10 @@ PrefabInstance:
     - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
       propertyPath: m_Name
       value: SlotMask (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1157,6 +1198,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1236,6 +1281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SlotMask (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1314,6 +1363,10 @@ PrefabInstance:
     - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
       propertyPath: m_Name
       value: SlotMask
+      objectReference: {fileID: 0}
+    - target: {fileID: 5938203807094203650, guid: c221adecdc566d543a9a77b018b9cca7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

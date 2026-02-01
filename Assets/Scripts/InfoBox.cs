@@ -18,17 +18,20 @@ public class InfoBox : MonoBehaviour
     [SerializeField]
     MaskData masklessPlayer;
 
+    [SerializeField]
+    Sprite playerSprite;
+    [SerializeField]
+    Sprite pigSprite;
+    [SerializeField]
+    Sprite bunnySprite;
+    [SerializeField]
+    Sprite sheepSprite;
+    [SerializeField]
+    Sprite wolfSprite;
+
     private void Start()
     {
         Hide();
-    }
-
-    public void setAnimals(Sprite animalSprite)
-    {
-        foreach (var mask in m_Icons)
-        {
-            setAnimal(mask, animalSprite);
-        }
     }
 
     public void setAnimal(SpriteRenderer parentSR, Sprite sprite)
@@ -37,16 +40,29 @@ public class InfoBox : MonoBehaviour
         spriteRenderer.sprite = sprite;
     }
 
-    public void AddMaskless()
+    public void AddIcon(Sprite icon, Color color, AnimalType type)
     {
-        setAnimal(m_Icons[m_IconCount], masklessPlayer.playerMask);
-        m_Icons[m_IconCount].sprite = masklessPlayer.defaultMask;
-        m_Icons[m_IconCount].gameObject.SetActive(true);
-        m_IconCount++;
-    }
+        Sprite animalSprite = null;
+        switch (type)
+        {
+            case AnimalType.Player:
+                animalSprite = playerSprite;
+                break;
+            case AnimalType.Pig:
+                animalSprite = pigSprite;
+                break;
+            case AnimalType.Bunny:
+                animalSprite = bunnySprite;
+                break;
+            case AnimalType.Sheep:
+                animalSprite = sheepSprite;
+                break;
+            case AnimalType.Wolf:
+                animalSprite = wolfSprite;
+                break;
+        }
+        setAnimal(m_Icons[m_IconCount], animalSprite);
 
-    public void AddIcon(Sprite icon, Color color)
-    {
         m_Icons[m_IconCount].sprite = icon;
         m_Icons[m_IconCount].gameObject.SetActive(true);
         m_Icons[m_IconCount].color = color;

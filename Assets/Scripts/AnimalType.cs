@@ -2,8 +2,9 @@ using UnityEngine;
 
 public enum AnimalType
 {
+    Player,
     Pig,
-    Sheep,
     Bunny,
+    Sheep,
     Wolf
 }

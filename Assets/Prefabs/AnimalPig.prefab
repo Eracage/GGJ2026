@@ -169,6 +169,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1918387924600691016}
     - target: {fileID: 6439333331242113606, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
+      propertyPath: animalType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6439333331242113606, guid: 712a9d233d635e248996cfbbfad9924e, type: 3}
       propertyPath: headSprite
       value: 
       objectReference: {fileID: 21300000, guid: 7af4b7077335c20498ffe3c3b4b91888, type: 3}

@@ -5,6 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AnimalController : MonoBehaviour, IInteractable
 {
+    public AnimalType animalType;
     public Sprite headSprite;
     public GameObject headPosition;
     public AnimalHeadHandler headPrefab;
@@ -124,7 +125,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     {
         infoBox.ShowIcons();
 
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(10.0f);
 
         infoBox.Hide();
     }
@@ -133,6 +134,8 @@ public class AnimalController : MonoBehaviour, IInteractable
     {
         if (!isAlive())
             return;
+
+        StartCoroutine(ShowAlertedMasks());
 
         AlertMask(mask1);
         if (mask2)
@@ -146,9 +149,9 @@ public class AnimalController : MonoBehaviour, IInteractable
         alertedMaskList.Add(mask);
 
         if (mask.UID == 0)
-            infoBox.AddMaskless();
+            infoBox.AddIcon(mask.defaultMask, mask.color, AnimalType.Player);
         else
-            infoBox.AddIcon(mask.defaultMask, mask.color);
+            infoBox.AddIcon(mask.defaultMask, mask.color, animalType);
     }
 
     void InteractionUpdate()
