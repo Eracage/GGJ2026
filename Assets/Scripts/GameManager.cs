@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public List<AnimalController> m_Animals;
 
-    private static GameManager m_Instance;
+    private static GameManager m_Instance = null;
 
     public List<MaskData> playerFoundMasks;
     public MaskData playerCurrentMask;
@@ -19,23 +19,27 @@ public class GameManager : MonoBehaviour
     public int totalKills = 0;
     public bool lastLevelWon = false;
 
-    void Start()
-    {
-        CreateInstance();
-        ResetLevel();
-    }
     void Awake()
     {
+        Debug.Log("Start");
         CreateInstance();
+        m_Animals = new List<AnimalController>();
+        ResetLevel();
     }
 
     void CreateInstance()
     {
-        if(GameManager.GetInstance())
-            Destroy(this);
-        m_Instance = this;
-        DontDestroyOnLoad(this);
-        m_Animals = new List<AnimalController>();
+        Debug.Log("CreateInstance1");
+        if (GameManager.GetInstance() == null)
+        {
+        Debug.Log("CreateInstance2");
+            DontDestroyOnLoad(gameObject);
+            m_Instance = this;
+            return;
+        }
+        Debug.Log("CreateInstance3");
+        DestroyImmediate(gameObject);
+        Debug.Log("CreateInstance4");
     }
 
     public void ResetLevel()
@@ -73,6 +77,8 @@ public class GameManager : MonoBehaviour
 
     public static GameManager GetInstance()
     {
+
+        Debug.Log("GetInstance");
         return m_Instance;
     }
 

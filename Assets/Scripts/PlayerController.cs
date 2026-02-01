@@ -69,6 +69,11 @@ public class PlayerController : MonoBehaviour
             playerCamera = Camera.main;
     }
 
+    private void OnDestroy()
+    {
+        InputSystem.actions.FindAction("Interact", true).started -= Interaction;
+    }
+
     private void Start()
     {
         GameManager.GetInstance().playerMaxStamina = maxStamina;
