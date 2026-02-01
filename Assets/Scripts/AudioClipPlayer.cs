@@ -7,11 +7,20 @@ public class AudioClipPlayer : MonoBehaviour
     public AudioClip audioClip;
     public bool playOnStart = false;
 
+    public bool loop = false;
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         if (playOnStart)
+        {
+            if (loop)
+            {
+                audioSource.loop = true;
+                audioSource.clip = audioClip;
+                audioSource.Play();
+            }
             audioSource.PlayOneShot(audioClip);
+        }
     }
     public void PlayAudio()
     {

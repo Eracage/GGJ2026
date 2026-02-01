@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class GameOverController : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameOverController : MonoBehaviour
 
     void Start()
     {
+
         if (GameManager.GetInstance())
         {
             m_Text.text = "You win!";
