@@ -11,20 +11,20 @@ public class GateDoor: MonoBehaviour
 	public bool leftHanded;
 
 	private float _width;
-	public float width;
+	public float width { get; set; }
 
 	private float _height;
-	public float height;
+	public float height { get; set; }
 
 	private void Start()
 	{
 		_height = height;
 		_width = width;
-		//CreateDoorMesh();
+		CreateDoorMesh();
 		
 	}
 
-    private void CreateDoorMesh()
+    public void CreateDoorMesh()
     {
 		mesh = new Mesh();
 		var fenceProfile = new Profile(new List<Vector2>
