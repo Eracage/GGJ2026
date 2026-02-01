@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     public float staminaRegenFactorWhenWalking = 0.25f;
     public float sprintCostStamina = 20;
     public float currentStamina = 100;
+    public AudioClipPlayer audio;
 
 
     public Transform model;
@@ -62,6 +63,7 @@ public class PlayerController : MonoBehaviour
         m_SprintAction = InputSystem.actions.FindAction("Sprint", true);
         m_CharacterController = transform.GetComponent<CharacterController>();
         m_Animator = GetComponentInChildren<Animator>();
+        audio = GetComponent<AudioClipPlayer>();
 
         if (!model)
             model = transform;
@@ -180,6 +182,15 @@ public class PlayerController : MonoBehaviour
         Vector2 inputVal = m_MoveAction.ReadValue<Vector2>();
         Vector3 inputDirection = new Vector3(inputVal.x, 0, inputVal.y);
         var sprintPressed = m_SprintAction.IsPressed();
+
+        if (sprintPressed && !audio.audioSource.isPlaying && currentStamina > 5)
+        {
+            audio.PlayAudio();
+        }
+        if (!sprintPressed && audio.audioSource.isPlaying && currentStamina > 5)
+        {
+            audio.audioSource.Stop();
+        }
 
         var forward = inputDirection.z;
         if (forward > 0)

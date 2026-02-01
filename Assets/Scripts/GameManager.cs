@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     public int totalKills = 0;
     public bool lastLevelWon = false;
+    AudioClipPlayer audioClipPlayer = null;
 
     void Awake()
     {
@@ -26,6 +27,11 @@ public class GameManager : MonoBehaviour
         m_Animals = new List<AnimalController>();
         finishGates = new List<Gate>();
         ResetLevel();
+    }
+
+    private void Start()
+    {
+        audioClipPlayer = GetComponent<AudioClipPlayer>();
     }
 
     void CreateInstance()
@@ -71,6 +77,7 @@ public class GameManager : MonoBehaviour
             {
                 gate.openingState = OpeningStateEnum.Opening;
             }
+            audioClipPlayer.PlayAudio();
             
             totalKills = m_Animals.Count;
         }

@@ -11,10 +11,18 @@ public class AudioClipPlayer : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if (playOnStart)
-            audioSource.PlayOneShot(audioClip);
+        {
+            audioSource.clip = audioClip;
+            audioSource.Play();
+        }
     }
     public void PlayAudio()
     {
         audioSource.PlayOneShot(audioClip);
+    }
+
+    public void StopAudio()
+    {
+        audioSource.Stop();
     }
 }
