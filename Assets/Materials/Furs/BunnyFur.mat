@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BunnyFur
-  m_Shader: {fileID: 4800000, guid: 6021d2c94df225f4b95594cee8f9ba72, type: 3}
+  m_Shader: {fileID: 4800000, guid: 589ea0397284e0e42b1985a0455d66b2, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -27,20 +27,33 @@ Material:
         m_Texture: {fileID: 10309, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
+    - _FurMap:
+        m_Texture: {fileID: 2800000, guid: c22fc16178bfeb94cb1b5985380c4287, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 2800000, guid: 376acec26d7e74a40b4b2bda2b456a37, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutout: 0.313
     - _Damper: 1
     - _FurJoint: 2
     - _FurLength: 0.2
+    - _FurScale: 0.78
     - _Gravity: -0.5
     - _Metallic: 0
     - _MoveScale: 1
     - _NormalFactor: 0.577
-    - _Occlusion: 0.894
+    - _NormalScale: 0.94
+    - _Occlusion: 1
     - _RandomDirection: 0.647
-    - _RimLightIntensity: 0.908
-    - _RimLightPower: 3.44
-    - _ShadowExtraBias: -0.336
+    - _RimLightIntensity: 0.386
+    - _RimLightPower: 1.7
+    - _ShadowExtraBias: -0.29
+    - _ShellAmount: 14
+    - _ShellStep: 0.00498
     - _Smoothness: 0.404
     - _Spring: 5
     - _TessFactor: 3.1
