@@ -191,7 +191,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0961522f4551b5c43aa167b6562f474b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimalController
+  headSprite: {fileID: 0}
+  headPosition: {fileID: 0}
+  headPrefab: {fileID: 0}
+  mask: {fileID: 0}
+  goreEffect: {fileID: 5461520631957302549, guid: 7057253ef9c828747b81c20f189ea8b1, type: 3}
+  model: {fileID: 3157304590471002307}
   m_InteractionData: {fileID: 11400000, guid: 62759184b19d25b4886a206544a7c20f, type: 2}
+  m_interactAttack: {fileID: 11400000, guid: 2e9d2aae64070764381ad9dd9be2322b, type: 2}
+  m_interactMask: {fileID: 11400000, guid: 808b1740af3cf2241a53b0b482f45a8a, type: 2}
+  m_interactPlay: {fileID: 11400000, guid: bc4aac65f7cd37043ad2cef76c193924, type: 2}
   m_MaxLoiterCooldown: 2
   m_MinLoiterCooldown: 10
   m_MaxLoiterRange: 6
@@ -199,6 +208,7 @@ MonoBehaviour:
   m_MaxWanderDelay: 150
   m_WanderStuckTimeout: 10
   m_WanderTimeForReturn: 15
+  debugMaterialChange: 0
   testNormalMaterial: {fileID: 2100000, guid: 722bba32668b7fd44acc0562bca1d7d4, type: 2}
   testInteractMaterial: {fileID: 2100000, guid: 3827f9fec04257c419971390016e4673, type: 2}
 --- !u!195 &1573237531497401987

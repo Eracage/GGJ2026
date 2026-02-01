@@ -9,6 +9,9 @@ public class AnimalController : MonoBehaviour, IInteractable
     public GameObject headPosition;
     public SpriteRenderer headPrefab;
     public MaskData mask = null;
+    public GameObject goreEffect;
+    GameObject m_goreEffect;
+    public GameObject model;
 
     enum State
     {
@@ -17,12 +20,19 @@ public class AnimalController : MonoBehaviour, IInteractable
         Informing,
         Interacting,
         Attacing,
-        Deceased
+        Lootable,
+        Deceased,
     }
     [Header("General")]
     State m_CurrentState = State.Loitering;
     [SerializeField]
     InteractionData m_InteractionData;
+    [SerializeField]
+    InteractionData m_interactAttack;
+    [SerializeField]
+    InteractionData m_interactMask;
+    [SerializeField]
+    InteractionData m_interactPlay;
     NavMeshAgent m_NavAgent;
     Vector3 m_TargetPosition;
 
@@ -49,6 +59,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     Vector3 m_WanderStart;
     [Space]
     [Header("Debug")]
+    public bool debugMaterialChange = false;
     public Material testNormalMaterial;
     public Material testInteractMaterial;
 
@@ -79,6 +90,10 @@ public class AnimalController : MonoBehaviour, IInteractable
             case State.Interacting:
                 InteractionUpdate();
                 break;
+            case State.Attacing:
+                break;
+            case State.Lootable:
+                break;
             case State.Deceased:
                 break;
 
@@ -89,6 +104,7 @@ public class AnimalController : MonoBehaviour, IInteractable
     {
 
     }
+
     void LoiterUpdate()
     {
         if (Time.time < m_NextLoiterTime)
@@ -114,7 +130,7 @@ public class AnimalController : MonoBehaviour, IInteractable
         {
             m_NextLoiterTime = Time.time + Random.Range(m_MinLoiterCooldown, m_MaxLoiterCooldown);
             m_TargetPosition = transform.position - (transform.position - GameManager.GetInstance().m_Animals[closest].transform.position);
-            m_NavAgent.SetDestination(m_TargetPosition);
+            SetNavDest(m_TargetPosition);
             Debug.Log("Animal " + gameObject.name + " is too far away and needs to return to back!");
             return;
         }
@@ -122,34 +138,118 @@ public class AnimalController : MonoBehaviour, IInteractable
         Vector3 randomPos = new Vector3(Random.Range(1.0f, 3.5f) * ((Random.Range(0, 2) < 1) ? -1 : 1), 0, Random.Range(1.0f, 3.5f) * ((Random.Range(0, 2) < 1) ? -1 : 1));
         m_TargetPosition = transform.position + randomPos;
         m_NextLoiterTime = Time.time + Random.Range(m_MinLoiterCooldown, m_MaxLoiterCooldown);
-        m_NavAgent.SetDestination(m_TargetPosition);
+        SetNavDest(m_TargetPosition);
     }
     void WanderUpdate()
     {
 
     }
+
     void InformingUpdate()
     {
 
     }
+
+    public InteractionData AvailableInteraction(bool activated = false)
+    {
+        switch (m_CurrentState)
+        {
+            case State.Loitering:
+            case State.Wandering:
+            case State.Informing:
+            case State.Interacting:
+            case State.Attacing:
+                if (activated)
+                {
+                    m_NavAgent.enabled = false;
+                    StartCoroutine(TestChangeColor());
+                    if (mask)
+                    {
+                        StartCoroutine(Attack(State.Lootable));
+                    }
+                    else
+                    {
+                        StartCoroutine(Attack(State.Deceased));
+                    }
+                }
+                return m_interactAttack;
+            case State.Lootable:
+                if (activated)
+                {
+                    if (mask)
+                    {
+                        StartCoroutine(Attack(State.Deceased));
+                        m_interactMask.mask = mask;
+                    }
+                    else
+                    {
+                        Debug.Log("Lootable without mask, why not Deceased?", this);
+                    }
+                }
+                return m_interactMask;
+            case State.Deceased:
+                if (activated)
+                {
+                    StartCoroutine(Attack(State.Deceased));
+                }
+                return m_interactPlay;
+        }
+        if (activated)
+        {
+            StartCoroutine(TestChangeColor());
+        }
+        Debug.Log("Unhandled state: " + m_CurrentState.ToString(), this);
+        return m_InteractionData;
+    }
+
     public InteractionData Interact()
     {
-        StartCoroutine(TestChangeColor());
-        return m_InteractionData;
+        return AvailableInteraction(true);
+    }
+
+    IEnumerator Unmask()
+    {
+        yield return new WaitForSeconds(2);
+    }
+
+    IEnumerator Attack(State nextState)
+    {
+        m_CurrentState = State.Interacting;
+        yield return new WaitForSeconds(2);
+        BloodSplatter();
+        m_CurrentState = nextState;
+    }
+
+    void BloodSplatter()
+    {
+        if (model)
+        {
+            GameObject.DestroyImmediate(model);
+        }
+        GetComponent<Collider>().isTrigger = true;
+        GameObject.Destroy(m_goreEffect, 1);
+        m_goreEffect = Instantiate(goreEffect, transform.position, Quaternion.identity, null);
     }
 
     IEnumerator TestChangeColor()
     {
-        GetComponent<MeshRenderer>().material = testInteractMaterial;
+        if (!debugMaterialChange)
+            yield break;
+
+        if (model)
+            model.GetComponent<MeshRenderer>().material = testInteractMaterial;
+
         yield return new WaitForSeconds(3.0f);
-        GetComponent<MeshRenderer>().material = testNormalMaterial;
+
+        if (model)
+            model.GetComponent<MeshRenderer>().material = testInteractMaterial;
     }
 
     IEnumerator StartWander(float delay)
     {
         yield return new WaitForSeconds(delay);
         if (m_CurrentState != State.Loitering)
-            yield return null;
+            yield break;
 
         Debug.Log("Animal " + gameObject.name + " started wandering!");
         m_CurrentState = State.Wandering;
@@ -169,19 +269,31 @@ public class AnimalController : MonoBehaviour, IInteractable
             }
         }
         m_TargetPosition = transform.position - ((transform.position - GameManager.GetInstance().m_Animals[longest].transform.position) / 3);
-        m_NavAgent.SetDestination(m_TargetPosition);
+        SetNavDest(m_TargetPosition);
         System.TimeSpan timeout = new System.TimeSpan(0, 0, 10);
         yield return new WaitUntil(IsOnTarget, timeout, ReturnFromWander);
+        if (m_CurrentState != State.Loitering)
+            yield break;
         ReturnFromWander();
+    }
+
+    void SetNavDest(Vector3 destination)
+    {
+        if (m_NavAgent && m_NavAgent.enabled)
+            m_NavAgent.SetDestination(m_TargetPosition);
     }
 
     void ReturnFromWander()
     {
+        if (m_CurrentState != State.Wandering)
+            return;
+
         Debug.Log("Animal " + gameObject.name + " is returning from wandering!");
         m_NextLoiterTime = Time.time + m_WanderTimeForReturn;
-        m_NavAgent.SetDestination(m_WanderStart);
+        SetNavDest(m_WanderStart);
         m_CurrentState = State.Loitering;
     }
+
     bool IsOnTarget()
     {
         return Vector3.Distance(transform.position, m_TargetPosition) < 1.0f;
