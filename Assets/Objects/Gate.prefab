@@ -105,8 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateDoor
   leftHanded: 0
-  width: 3.5
-  height: 2.5
 --- !u!65 &4058039206851959906
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,6 +136,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2679852793650144649}
   - component: {fileID: 6717788778783295770}
+  - component: {fileID: 8454094579534057125}
   m_Layer: 0
   m_Name: Gate
   m_TagString: Untagged
@@ -181,6 +180,22 @@ MonoBehaviour:
   openingAngle: 120
   openingTime: 1
   openingState: 0
+--- !u!208 &8454094579534057125
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8001960628643681284}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 3.44, y: 2.495, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8701049536691296049
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,8 +301,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateDoor
   leftHanded: 1
-  width: 3.5
-  height: 2.5
 --- !u!65 &7285340289048958313
 BoxCollider:
   m_ObjectHideFlags: 0

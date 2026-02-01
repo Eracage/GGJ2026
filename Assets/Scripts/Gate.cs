@@ -18,24 +18,15 @@ public class Gate : MonoBehaviour
 
 	public float openingAngle = 90f;
 	public float openingTime = 2f;
-
-	private Mesh columnMesh;
-
-    private Mesh doorMesh;
-
+	
 	private float angleDelta = 0;
 	private float angleDirection = 1;
 
 	public OpeningStateEnum openingState = OpeningStateEnum.Stopped;
-
+	
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {
-		door1.width = width / 2f;
-		door1.height = height;
-		door2.width = width / 2f;
-		door2.height = height;
-
+    {		
 		door1.gameObject.transform.localPosition = new Vector3(width / 2f, 0, 0)			;
 		door1.gameObject.transform.localRotation = Quaternion.AngleAxis(180f,new Vector3(0,1,0));
 		door1.leftHanded = false;
@@ -43,6 +34,14 @@ public class Gate : MonoBehaviour
 		door2.gameObject.transform.localPosition = new Vector3(-width / 2f, 0, 0);
 		door2.gameObject.transform.localRotation = Quaternion.AngleAxis(0f, new Vector3(0, 1, 0));
 		door2.leftHanded = true;
+
+		door1.width = width / 2f;
+		door1.height = height;
+		door2.width = width / 2f;
+		door2.height = height;
+
+		door1.CreateDoorMesh(); 
+		door2.CreateDoorMesh();
 	}
 
     // Update is called once per frame
@@ -77,6 +76,7 @@ public class Gate : MonoBehaviour
 		{
 			angleDelta = openingAngle;
 			openingState = OpeningStateEnum.Stopped;
+			UpdateAngle();
 			return;
 		}
 		else
@@ -84,14 +84,22 @@ public class Gate : MonoBehaviour
 		{
 			angleDelta = 0;
 			openingState = OpeningStateEnum.Stopped;
+			UpdateAngle();
 			return;
 		}
 
-		angleDelta +=  Time.deltaTime / openingTime* openingAngle * angleDirection;
+		if (openingState != OpeningStateEnum.Stopped)
+		{
+			angleDelta += Time.deltaTime / openingTime * openingAngle * angleDirection;
+		}
 
+		UpdateAngle();
+
+	}
+
+	private void UpdateAngle()
+	{
 		door1.gameObject.transform.localRotation = Quaternion.AngleAxis(180f + angleDelta, new Vector3(0, 1, 0));
 		door2.gameObject.transform.localRotation = Quaternion.AngleAxis(-angleDelta, new Vector3(0, 1, 0));
-
-
 	}
 }
